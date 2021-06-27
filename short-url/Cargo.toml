@@ -9,3 +9,5 @@ edition = "2018"
 [dependencies]
 nanoid = "0.4.0"
 clap = "2.31.2"
+actix-web = "3.3.2"
+serde = "1.0.125"
