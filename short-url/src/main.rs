@@ -1,3 +1,7 @@
+extern crate nanoid;
+
+mod generate_url_code;
+
 fn main() {
-    println!("Hello, world!");
+    println!("{:?}",generate_url_code::generate_url_code());
 }
