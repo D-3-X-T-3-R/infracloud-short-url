@@ -1,7 +1,12 @@
 extern crate nanoid;
 
 mod generate_url_code;
+mod configuration_parameters;
 
 fn main() {
-    println!("{:?}",generate_url_code::generate_url_code());
+    let app_name = "short-url";
+
+    let config_param = configuration_parameters::get_configuration_parameters(app_name);
+
+    println!("{:?}",config_param);
 }
