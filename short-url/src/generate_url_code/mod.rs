@@ -46,3 +46,24 @@ pub fn generate_shorten_url(long_url: String) -> Result<UrlDet, String> {
         short_url: short_url,
     })
 }
+
+pub fn generate_original_url(short_url: String) -> Result<UrlDet, String> {
+    let app_name = "short-url";
+    let config_param = configuration_parameters::get_configuration_parameters(app_name);
+    let existing_map = read_existing_map(&config_param);
+    let mut original_url: String = "".to_string();
+    if existing_map.short_url_map.contains_key(&short_url) {
+        original_url = existing_map
+            .short_url_map
+            .get(&short_url)
+            .unwrap()
+            .to_string();
+    } else {
+        print!("Invalid url : {}", short_url);
+    }
+
+    Ok(UrlDet {
+        long_url: original_url,
+        short_url: short_url,
+    })
+}

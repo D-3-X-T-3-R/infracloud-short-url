@@ -23,6 +23,7 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .wrap(middleware::Logger::default())
             .service(routes::get_shorten_url)
+            .service(routes::get_original_url)
         // add new services here
     })
     .bind(&host_url)
