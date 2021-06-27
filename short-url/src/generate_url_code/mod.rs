@@ -1,5 +1,6 @@
 use crate::configuration_parameters;
 use crate::reader::read_existing_map;
+use crate::writer::write_to_file;
 use nanoid::nanoid;
 use serde::{Deserialize, Serialize};
 
@@ -19,18 +20,17 @@ pub fn generate_shorten_url(long_url: String) -> Result<UrlDet, String> {
     let config_param = configuration_parameters::get_configuration_parameters(app_name);
     let mut existing_map = read_existing_map(&config_param);
     let local_host = config_param.local_host.to_string() + ":" + &config_param.port + "/";
-    let def_addr = String::from(local_host.to_string());
     let short_url = if existing_map.long_url_map.contains_key(&long_url) {
         let url_code = existing_map
             .long_url_map
             .get(&long_url)
             .unwrap()
             .to_string();
-        let shorten = def_addr + &url_code;
+        let shorten = local_host + &url_code;
         shorten
     } else {
         let url_code = generate_url_code().unwrap();
-        let shorten = def_addr + &url_code;
+        let shorten = local_host + &url_code;
         existing_map
             .long_url_map
             .insert(long_url.to_string(), url_code.to_string());
@@ -39,6 +39,7 @@ pub fn generate_shorten_url(long_url: String) -> Result<UrlDet, String> {
             .insert(url_code.to_string(), long_url.to_string());
         shorten
     };
+    write_to_file(existing_map.long_url_map, config_param);
 
     Ok(UrlDet {
         long_url: long_url,

@@ -5,6 +5,7 @@ mod configuration_parameters;
 mod generate_url_code;
 mod reader;
 mod routes;
+mod writer;
 
 use actix_web::{middleware, App, HttpServer};
 
