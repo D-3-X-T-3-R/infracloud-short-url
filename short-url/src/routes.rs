@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct URL {
-    url: String
+    url: String,
 }
 
 // Get shorten URL

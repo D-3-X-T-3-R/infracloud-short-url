@@ -1,8 +1,8 @@
-extern crate nanoid;
 extern crate actix_web;
+extern crate nanoid;
 
-mod generate_url_code;
 mod configuration_parameters;
+mod generate_url_code;
 mod routes;
 
 use actix_web::{middleware, App, HttpServer};

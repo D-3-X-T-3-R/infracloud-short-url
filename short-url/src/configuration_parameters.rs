@@ -1,4 +1,3 @@
-
 use clap::{App, Arg};
 
 pub fn get_configuration_parameters(app_name: &str) -> ConfigurationParameters {
