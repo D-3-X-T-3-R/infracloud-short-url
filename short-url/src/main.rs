@@ -3,6 +3,7 @@ extern crate nanoid;
 
 mod configuration_parameters;
 mod generate_url_code;
+mod reader;
 mod routes;
 
 use actix_web::{middleware, App, HttpServer};
@@ -27,5 +28,4 @@ async fn main() -> std::io::Result<()> {
     .expect("Could not bind to host url, address already in use.")
     .run()
     .await
-    // println!("{:?}",config_param);
 }
