@@ -3,6 +3,7 @@ use crate::reader::read_existing_map;
 use crate::writer::write_to_file;
 use nanoid::nanoid;
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 
 #[derive(Deserialize, Serialize)]
 pub struct UrlDet {
@@ -10,9 +11,13 @@ pub struct UrlDet {
     pub short_url: String,
 }
 
-pub fn generate_url_code() -> Result<String, String> {
+pub fn generate_url_code(url_map: &HashMap<String, String>) -> Result<String, String> {
     let url_code = nanoid!(8);
-    Ok(url_code)
+    if url_map.contains_key(&url_code) {
+        generate_url_code(url_map)
+    } else {
+        Ok(url_code)
+    }
 }
 
 pub fn generate_shorten_url(long_url: String) -> Result<UrlDet, String> {
@@ -29,7 +34,7 @@ pub fn generate_shorten_url(long_url: String) -> Result<UrlDet, String> {
         let shorten = local_host + &url_code;
         shorten
     } else {
-        let url_code = generate_url_code().unwrap();
+        let url_code = generate_url_code(&existing_map.short_url_map).unwrap();
         let shorten = local_host + &url_code;
         existing_map
             .long_url_map
