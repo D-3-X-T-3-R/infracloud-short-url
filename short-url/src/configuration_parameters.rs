@@ -40,7 +40,7 @@ fn get_eligible_arguments_for_app(app_name: &str) -> clap::ArgMatches {
         .arg(
             Arg::with_name("local_host")
                 .long("local-host")
-                .value_name("Input File")
+                .value_name("Local Host")
                 .help("IP on which the program will run.")
                 .default_value("127.0.0.1")
                 .required(false),
@@ -55,7 +55,7 @@ fn get_eligible_arguments_for_app(app_name: &str) -> clap::ArgMatches {
         .arg(
             Arg::with_name("port")
                 .long("port")
-                .value_name("Input File")
+                .value_name("Port")
                 .help("port on which the program will run.")
                 .default_value("8000")
                 .required(false),
